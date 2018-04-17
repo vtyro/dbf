@@ -5,6 +5,7 @@ import org.jamel.dbf.utils.DbfUtils;
 
 import java.io.DataInput;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,10 @@ public class DbfHeader {
 
 
     public static DbfHeader read(DataInput dataInput) throws DbfException {
+        return read(dataInput, Charset.defaultCharset());
+    }
+
+    public static DbfHeader read(DataInput dataInput, Charset charset) throws DbfException {
         try {
             DbfHeader header = new DbfHeader();
 
@@ -65,7 +70,7 @@ public class DbfHeader {
             header.fields = new ArrayList<>();
             DbfField field;
             int fieldIndex = 0;
-            while ((field = DbfField.read(dataInput, fieldIndex++)) != null) { /* 32 each */
+            while ((field = DbfField.read(dataInput, fieldIndex++, charset)) != null) { /* 32 each */
                 header.fields.add(field);
             }
 

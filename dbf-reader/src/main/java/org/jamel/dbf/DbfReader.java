@@ -32,7 +32,7 @@ public class DbfReader implements Closeable {
     public DbfReader(File file) throws DbfException {
         try {
             dataInput = new RandomAccessFile(file, "r");
-            header = DbfHeader.read(dataInput);
+            header = DbfHeader.read(dataInput, charset);
             skipToDataBeginning();
         } catch (IOException e) {
             throw new DbfException("Cannot open Dbf file " + file, e);
@@ -47,7 +47,7 @@ public class DbfReader implements Closeable {
     public DbfReader(InputStream in) throws DbfException {
         try {
             dataInput = new DataInputStream(new BufferedInputStream(in));
-            header = DbfHeader.read(dataInput);
+            header = DbfHeader.read(dataInput, charset);
             skipToDataBeginning();
         } catch (IOException e) {
             throw new DbfException("Cannot read Dbf", e);

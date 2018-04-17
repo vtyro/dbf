@@ -5,6 +5,7 @@ import org.jamel.dbf.utils.DbfUtils;
 
 import java.io.DataInput;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 
 /**
@@ -40,10 +41,12 @@ public class DbfField {
      * and the stream "pointer" is supposed to be positioned properly.</p>
      *
      * @param in DataInputStream
+     * @param fieldIndex - index of field
+     * @param charset - charset of the field name
      * @return created DBFField object.
      * @throws DbfException if any stream reading problems occurs.
      */
-    public static DbfField read(DataInput in, int fieldIndex) throws DbfException {
+    public static DbfField read(DataInput in, int fieldIndex, Charset charset) throws DbfException {
         try {
             DbfField field = new DbfField(fieldIndex);
 
@@ -59,7 +62,7 @@ public class DbfField {
 
             int zeroIndex = 0;
             while (zeroIndex < nameBuf.length && nameBuf[zeroIndex] != 0) zeroIndex++;
-            field.fieldName = new String(nameBuf, 0, zeroIndex);
+            field.fieldName = new String(nameBuf, 0, zeroIndex, charset);
             byte fieldType  = in.readByte();
             field.dataType = DbfDataType.valueOf(fieldType);    /* 11    */
             if (field.dataType == null) {

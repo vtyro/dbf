@@ -1,24 +1,16 @@
 package org.jamel.dbf.processor;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jamel.dbf.DbfReader;
 import org.jamel.dbf.exception.DbfException;
 import org.jamel.dbf.structure.DbfDataType;
 import org.jamel.dbf.structure.DbfField;
 import org.jamel.dbf.structure.DbfHeader;
 import org.jamel.dbf.utils.StringUtils;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.jamel.dbf.utils.StringUtils.rightPad;
 
